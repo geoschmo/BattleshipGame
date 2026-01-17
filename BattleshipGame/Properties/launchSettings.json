@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "BattleshipGame": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:49283;http://localhost:49284"
+    }
+  }
+}

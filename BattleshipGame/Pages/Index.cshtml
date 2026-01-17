@@ -1,0 +1,171 @@
+@page
+@model BattleshipGame.Pages.IndexModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Battleship</title>
+    <link rel="stylesheet" href="~/css/styles.css" asp-append-version="true">
+    <style>
+        .back-link {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            background: var(--surface-color);
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            z-index: 1001;
+            transition: background 0.2s;
+        }
+        .back-link:hover {
+            background: var(--border-color);
+        }
+    </style>
+</head>
+<body>
+    <a href="@Model.PortfolioUrl" class="back-link">&larr; Back to Portfolio</a>
+
+    <!-- Home Screen -->
+    <div id="home-screen" class="screen active">
+        <div class="container">
+            <h1>Battleship</h1>
+            <p class="subtitle">Classic naval combat game</p>
+            <div class="game-size-selector">
+                <label>Game Size:</label>
+                <div class="size-options">
+                    <label class="size-option">
+                        <input type="radio" name="game-size" value="Large" checked>
+                        <span class="size-label">Large</span>
+                        <span class="size-desc">10x10, 5 ships</span>
+                    </label>
+                    <label class="size-option">
+                        <input type="radio" name="game-size" value="Medium">
+                        <span class="size-label">Medium</span>
+                        <span class="size-desc">9x9, 4 ships</span>
+                    </label>
+                    <label class="size-option">
+                        <input type="radio" name="game-size" value="Small">
+                        <span class="size-label">Small</span>
+                        <span class="size-desc">8x8, 3 ships</span>
+                    </label>
+                </div>
+            </div>
+            <div class="button-group">
+                <button id="single-player-btn" class="btn btn-primary">Play vs Computer</button>
+                <button id="create-room-btn" class="btn btn-secondary">Create Room</button>
+                <button id="show-join-btn" class="btn btn-secondary">Join Room</button>
+            </div>
+            <div id="join-room-form" class="hidden">
+                <input type="text" id="room-code-input" placeholder="Enter room code" maxlength="6">
+                <button id="join-room-btn" class="btn btn-primary">Join</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Waiting Screen -->
+    <div id="waiting-screen" class="screen">
+        <div class="container">
+            <h2>Room Created</h2>
+            <div class="room-code-display">
+                <p>Share this link with your friend:</p>
+                <div class="room-code" id="room-code-display"></div>
+                <button id="copy-code-btn" class="btn btn-secondary">Copy Invite Link</button>
+            </div>
+            <p class="waiting-text">Waiting for opponent to join...</p>
+            <div class="spinner"></div>
+        </div>
+    </div>
+
+    <!-- Setup Screen -->
+    <div id="setup-screen" class="screen">
+        <div class="container">
+            <h2>Place Your Ships</h2>
+
+            <div id="setup-board-container">
+                <div id="setup-board" class="board"></div>
+            </div>
+
+            <div class="setup-controls">
+                <div class="ship-selector">
+                    <label>Select Ship:</label>
+                    <select id="ship-selector">
+                        <option value="Carrier">Carrier (5)</option>
+                        <option value="Battleship">Battleship (4)</option>
+                        <option value="Cruiser">Cruiser (3)</option>
+                        <option value="Submarine">Submarine (3)</option>
+                        <option value="Destroyer">Destroyer (2)</option>
+                    </select>
+                </div>
+                <div class="orientation-toggle">
+                    <label>
+                        <input type="checkbox" id="orientation-toggle">
+                        Horizontal
+                    </label>
+                </div>
+                <button id="random-ships-btn" class="btn btn-secondary">Random Placement</button>
+                <button id="clear-board-btn" class="btn btn-warning">Clear Board</button>
+                <button id="ready-btn" class="btn btn-primary" disabled>Ready!</button>
+            </div>
+
+            <p class="instruction">Click on the board to place ships, or use random placement.</p>
+        </div>
+    </div>
+
+    <!-- Game Screen -->
+    <div id="game-screen" class="screen">
+        <div class="game-container">
+            <h2>Battleship Game</h2>
+
+            <div class="turn-indicator">
+                <p id="turn-status">Waiting for game to start...</p>
+            </div>
+
+            <div class="boards-container">
+                <div class="board-section">
+                    <h3>Your Fleet</h3>
+                    <div id="player-board" class="board"></div>
+                </div>
+
+                <div class="board-section">
+                    <h3>Enemy Waters</h3>
+                    <div id="opponent-board" class="board targeting"></div>
+                </div>
+            </div>
+
+            <div class="game-log">
+                <h4>Game Log</h4>
+                <div id="log-messages"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="gameover-screen" class="screen">
+        <div class="container">
+            <h2 id="result-title">Game Over</h2>
+            <p id="result-message"></p>
+            <button id="play-again-btn" class="btn btn-primary">Play Again</button>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification hidden">
+        <span id="notification-text"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+    <script>
+        // Pass room code from URL to JavaScript (if present)
+        window.inviteRoomCode = '@(Model.Room ?? "")';
+    </script>
+    <script src="~/js/game.js" asp-append-version="true"></script>
+</body>
+</html>

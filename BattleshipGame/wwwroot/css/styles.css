@@ -1,0 +1,842 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #7c3aed;
+    --success-color: #10b981;
+    --danger-color: #ef4444;
+    --warning-color: #f59e0b;
+    --bg-color: #0f172a;
+    --surface-color: #1e293b;
+    --text-color: #f1f5f9;
+    --border-color: #334155;
+    --water-color: #3b82f6;
+    --ship-color: #64748b;
+    --hit-color: #ef4444;
+    --miss-color: #94a3b8;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    background: linear-gradient(135deg, var(--bg-color) 0%, #1e40af 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    overflow-x: hidden;
+}
+
+/* Screen Management */
+.screen {
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    animation: fadeIn 0.3s ease-in;
+}
+
+.screen.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Container */
+.container {
+    background: var(--surface-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--water-color);
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--water-color);
+}
+
+h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+}
+
+.subtitle {
+    color: var(--miss-color);
+    margin-bottom: 2rem;
+}
+
+/* Game Size Selector */
+.game-size-selector {
+    margin-bottom: 1.5rem;
+}
+
+.game-size-selector > label {
+    display: block;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+}
+
+.size-options {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.size-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    background: var(--bg-color);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.size-option:hover {
+    background: var(--border-color);
+}
+
+.size-option input[type="radio"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    accent-color: var(--primary-color);
+}
+
+.size-option .size-label {
+    font-weight: 600;
+    min-width: 70px;
+}
+
+.size-option .size-desc {
+    color: var(--miss-color);
+    font-size: 0.875rem;
+}
+
+@media (min-width: 768px) {
+    .size-options {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .size-option {
+        flex: 0 0 auto;
+    }
+}
+
+/* Buttons */
+.btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    min-width: 140px;
+    touch-action: manipulation;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #1d4ed8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+}
+
+.btn-secondary {
+    background: var(--secondary-color);
+    color: white;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #6d28d9;
+}
+
+.btn-warning {
+    background: var(--warning-color);
+    color: white;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Input */
+input[type="text"] {
+    padding: 0.875rem;
+    font-size: 1.125rem;
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+/* Room Code Display */
+.room-code-display {
+    margin: 2rem 0;
+}
+
+.room-code {
+    font-size: 3rem;
+    font-weight: bold;
+    letter-spacing: 0.3em;
+    color: var(--primary-color);
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    user-select: all;
+}
+
+/* Spinner */
+.spinner {
+    border: 4px solid var(--border-color);
+    border-top: 4px solid var(--primary-color);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 2rem auto;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Board */
+.board {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 2px;
+    background: var(--border-color);
+    border: 2px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 2px;
+    margin: 1rem auto;
+    max-width: 400px;
+    aspect-ratio: 1;
+}
+
+.board.board-8 {
+    grid-template-columns: repeat(8, 1fr);
+}
+
+.board.board-9 {
+    grid-template-columns: repeat(9, 1fr);
+}
+
+.board.board-10 {
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.cell {
+    background: var(--water-color);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.cell:hover {
+    filter: brightness(1.2);
+}
+
+.cell.ship {
+    background: var(--ship-color);
+}
+
+/* Ship Graphics - Segments */
+.cell.ship-segment {
+    background: var(--water-color);
+    position: relative;
+}
+
+.cell.ship-segment::before {
+    content: '';
+    position: absolute;
+    background: var(--ship-color);
+    border: 2px solid #475569;
+    box-sizing: border-box;
+}
+
+/* Horizontal ship segments */
+.cell.ship-h.ship-bow::before {
+    top: 15%;
+    bottom: 15%;
+    left: 5%;
+    right: 0;
+    border-radius: 50% 0 0 50%;
+    border-right: none;
+}
+
+.cell.ship-h.ship-mid::before {
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    right: 0;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+}
+
+.cell.ship-h.ship-stern::before {
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    right: 5%;
+    border-radius: 0 30% 30% 0;
+    border-left: none;
+}
+
+/* Reversed bow for back of battleship/submarine (horizontal) */
+.cell.ship-h.ship-bow-end::before {
+    top: 15%;
+    bottom: 15%;
+    left: 0;
+    right: 5%;
+    border-radius: 0 50% 50% 0;
+    border-left: none;
+}
+
+/* Reversed stern for front of carrier (horizontal) - rotated 180deg */
+.cell.ship-h.ship-stern-front::before {
+    top: 15%;
+    bottom: 15%;
+    left: 5%;
+    right: 0;
+    border-radius: 30% 0 0 30%;
+    border-right: none;
+}
+
+/* Vertical ship segments */
+.cell.ship-v.ship-bow::before {
+    left: 15%;
+    right: 15%;
+    top: 5%;
+    bottom: 0;
+    border-radius: 50% 50% 0 0;
+    border-bottom: none;
+}
+
+.cell.ship-v.ship-mid::before {
+    left: 15%;
+    right: 15%;
+    top: 0;
+    bottom: 0;
+    border-radius: 0;
+    border-top: none;
+    border-bottom: none;
+}
+
+.cell.ship-v.ship-stern::before {
+    left: 15%;
+    right: 15%;
+    top: 0;
+    bottom: 5%;
+    border-radius: 0 0 30% 30%;
+    border-top: none;
+}
+
+/* Reversed bow for back of battleship/submarine (vertical) */
+.cell.ship-v.ship-bow-end::before {
+    left: 15%;
+    right: 15%;
+    top: 0;
+    bottom: 5%;
+    border-radius: 0 0 50% 50%;
+    border-top: none;
+}
+
+/* Reversed stern for front of carrier (vertical) - rotated 180deg */
+.cell.ship-v.ship-stern-front::before {
+    left: 15%;
+    right: 15%;
+    top: 5%;
+    bottom: 0;
+    border-radius: 30% 30% 0 0;
+    border-bottom: none;
+}
+
+/* Single cell ship (Destroyer can look like a small boat) */
+.cell.ship-h.ship-single::before,
+.cell.ship-v.ship-single::before {
+    top: 15%;
+    bottom: 15%;
+    left: 10%;
+    right: 10%;
+    border-radius: 40%;
+    border: 2px solid #475569;
+}
+
+/* Ship details - add some deck lines */
+.cell.ship-segment::after {
+    content: '';
+    position: absolute;
+    background: #475569;
+    opacity: 0.5;
+}
+
+.cell.ship-h.ship-mid::after {
+    top: 45%;
+    height: 10%;
+    left: 10%;
+    right: 10%;
+}
+
+.cell.ship-v.ship-mid::after {
+    left: 45%;
+    width: 10%;
+    top: 10%;
+    bottom: 10%;
+}
+
+/* Preview segments */
+.cell.preview.ship-segment::before {
+    background: rgba(100, 116, 139, 0.6);
+    border-color: rgba(71, 85, 105, 0.6);
+}
+
+.cell.invalid.ship-segment::before {
+    background: rgba(239, 68, 68, 0.5);
+    border-color: rgba(185, 28, 28, 0.6);
+}
+
+/* Hit marker on ship - fire/damage effect */
+.cell.ship-segment.hit::before {
+    background: linear-gradient(135deg, #7f1d1d 0%, var(--hit-color) 50%, #991b1b 100%);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.cell.ship-segment.hit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, #fbbf24 0%, #f97316 40%, #ef4444 70%, transparent 100%);
+    border-radius: 50%;
+    animation: shipFire 1s ease-in-out infinite alternate;
+    opacity: 1;
+}
+
+@keyframes shipFire {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.9; }
+    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+}
+
+/* Hit indicator - explosion effect */
+.cell.hit {
+    background: var(--hit-color);
+    position: relative;
+    overflow: visible;
+}
+
+.cell.hit::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, #fbbf24 0%, #f97316 40%, #ef4444 70%, transparent 100%);
+    border-radius: 50%;
+    z-index: 2;
+    animation: hitPulse 1.5s ease-out infinite;
+}
+
+.cell.hit::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 40%;
+    background: #fef3c7;
+    border-radius: 50%;
+    box-shadow:
+        0 0 4px 2px #fbbf24,
+        0 0 8px 4px rgba(251, 191, 36, 0.5);
+    z-index: 3;
+}
+
+@keyframes hitPulse {
+    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+/* Miss indicator - water splash effect */
+.cell.miss {
+    background: var(--water-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.cell.miss::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60%;
+    height: 60%;
+    border: 3px solid rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    background: transparent;
+    box-shadow:
+        0 0 0 2px rgba(255, 255, 255, 0.3),
+        inset 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+.cell.miss::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 25%;
+    height: 25%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.4) 50%, transparent 100%);
+    border-radius: 50%;
+}
+
+/* Outer ripple for miss */
+.cell.miss.ripple-animate::before {
+    animation: ripple 2s ease-out infinite;
+}
+
+@keyframes ripple {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.3); opacity: 0; }
+}
+
+.cell.preview {
+    background: rgba(100, 116, 139, 0.5);
+}
+
+.cell.invalid {
+    background: rgba(239, 68, 68, 0.5);
+}
+
+.board.targeting .cell:not(.hit):not(.miss):hover {
+    background: rgba(59, 130, 246, 0.7);
+}
+
+/* Setup Screen */
+.ships-info {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+}
+
+.ships-info ul {
+    list-style: none;
+    margin-top: 0.5rem;
+}
+
+.ships-info li {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    background: var(--surface-color);
+    border-radius: 0.25rem;
+}
+
+.ships-info li.placed {
+    opacity: 0.5;
+    text-decoration: line-through;
+}
+
+.setup-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.ship-selector, .orientation-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+select {
+    padding: 0.5rem;
+    font-size: 1rem;
+    border-radius: 0.375rem;
+    background: var(--bg-color);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    flex: 1;
+}
+
+.instruction {
+    margin-top: 1rem;
+    color: var(--miss-color);
+    font-size: 0.875rem;
+}
+
+/* Game Screen */
+.game-container {
+    background: var(--surface-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.turn-indicator {
+    background: var(--bg-color);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#turn-status {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.boards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.board-section {
+    flex: 1;
+}
+
+/* Game Log */
+.game-log {
+    margin-top: 2rem;
+    background: var(--bg-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.game-log h4 {
+    margin-bottom: 0.5rem;
+}
+
+#log-messages {
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+.log-entry {
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 0.25rem;
+    background: var(--surface-color);
+}
+
+.log-entry.hit {
+    color: var(--hit-color);
+    border-left: 3px solid var(--hit-color);
+}
+
+.log-entry.miss {
+    color: var(--miss-color);
+    border-left: 3px solid var(--miss-color);
+}
+
+.log-entry.sunk {
+    color: var(--danger-color);
+    font-weight: bold;
+    border-left: 3px solid var(--danger-color);
+}
+
+/* Notification Toast */
+.notification {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface-color);
+    color: var(--text-color);
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    animation: slideDown 0.3s ease-out;
+}
+
+.notification.hidden {
+    display: none;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translate(-50%, -100%);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-50%, 0);
+        opacity: 1;
+    }
+}
+
+/* Utility Classes */
+.hidden {
+    display: none !important;
+}
+
+.waiting-text {
+    margin: 1rem 0;
+    color: var(--miss-color);
+}
+
+/* Desktop Styles */
+@media (min-width: 768px) {
+    .button-group {
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    .boards-container {
+        flex-direction: row;
+        gap: 2rem;
+    }
+
+    .board {
+        max-width: 350px;
+    }
+
+    .setup-controls {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .ship-selector, .orientation-toggle {
+        flex: 0 0 auto;
+    }
+
+    .room-code {
+        font-size: 4rem;
+    }
+
+    h1 {
+        font-size: 3.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .board {
+        max-width: 400px;
+    }
+
+    .game-container {
+        padding: 2rem;
+    }
+}
+
+/* Prevent text selection on game elements */
+.board, .btn, .cell {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Reconnect Prompt */
+.reconnect-prompt {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.reconnect-content {
+    background: var(--surface-color);
+    border-radius: 1rem;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    max-width: 400px;
+    width: 90%;
+}
+
+.reconnect-content h3 {
+    color: var(--water-color);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.reconnect-content p {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+}
+
+.reconnect-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.reconnect-buttons .btn {
+    min-width: 120px;
+}

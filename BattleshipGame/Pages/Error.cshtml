@@ -1,0 +1,48 @@
+@page
+@model BattleshipGame.Pages.ErrorModel
+@{
+    ViewData["Title"] = "Error";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f172a;
+            color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+        }
+        h1 {
+            color: #ef4444;
+        }
+        a {
+            color: #3b82f6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Error</h1>
+        <p>An error occurred while processing your request.</p>
+        @if (Model.ShowRequestId)
+        {
+            <p><strong>Request ID:</strong> @Model.RequestId</p>
+        }
+        <p><a href="/">Return to game</a></p>
+    </div>
+</body>
+</html>

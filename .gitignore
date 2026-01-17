@@ -1,0 +1,74 @@
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Visual Studio
+.vs/
+*.user
+*.userosscache
+*.suo
+*.cache
+*.vspscc
+*.vssscc
+.builds
+*.pidb
+*.svclog
+*.scc
+
+# Rider
+.idea/
+
+# User-specific files
+*.rsuser
+*.sln.docstates
+
+# Build results
+[Dd]ebugPublic/
+[Rr]eleasePublic/
+
+# NuGet Packages
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Publish output
+publish/
+
+# App_Data (contains LiteDB database)
+App_Data/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Secrets
+*.pfx
+*.publishsettings
+appsettings.*.local.json
