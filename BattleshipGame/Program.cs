@@ -61,6 +61,14 @@ builder.Services.AddSingleton<GameService>();
 
 var app = builder.Build();
 
+// When hosted as a sub-application (e.g. /battleship), set the path base
+// so all URL generation (SignalR, static files, etc.) resolves correctly.
+var pathBase = app.Configuration["PathBase"];
+if (!string.IsNullOrEmpty(pathBase))
+{
+    app.UsePathBase(pathBase);
+}
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
