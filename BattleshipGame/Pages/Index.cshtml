@@ -165,6 +165,8 @@
     <script>
         // Pass room code from URL to JavaScript (if present)
         window.inviteRoomCode = '@(Model.Room ?? "")';
+        // Resolve the app base path so SignalR connects to the correct URL
+        window.gameHubUrl = '@Url.Content("~/gameHub")';
     </script>
     <script src="~/js/game.js" asp-append-version="true"></script>
 </body>

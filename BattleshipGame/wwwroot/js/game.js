@@ -224,7 +224,7 @@ const BattleshipAI = {
 // Initialize SignalR connection
 async function initializeConnection() {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("gameHub")
+        .withUrl(window.gameHubUrl || "/gameHub")
         .withAutomaticReconnect()
         .build();
 
@@ -1184,8 +1184,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     document.getElementById('copy-code-btn').addEventListener('click', async () => {
-        // Invite URL is now at root since this is a standalone app
-        const inviteUrl = `${window.location.origin}/?room=${currentRoomCode}`;
+        // Build invite URL using the current page path (works under sub-apps too)
+        const inviteUrl = `${window.location.origin}${window.location.pathname}?room=${currentRoomCode}`;
         try {
             await navigator.clipboard.writeText(inviteUrl);
             showNotification("Invite link copied!");
