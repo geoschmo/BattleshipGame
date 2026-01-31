@@ -224,7 +224,7 @@ const BattleshipAI = {
 // Initialize SignalR connection
 async function initializeConnection() {
     connection = new signalR.HubConnectionBuilder()
-        .withUrl("/gameHub")
+        .withUrl("gameHub")
         .withAutomaticReconnect()
         .build();
 
