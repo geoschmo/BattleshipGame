@@ -17,7 +17,7 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Publish
-        run: dotnet publish ./Battleship/Battleship.csproj -c Release -o publish
+        run: dotnet publish ./BattleshipGame/BattleshipGame.csproj -c Release -o publish
 
       - name: Download MSDeploy
         shell: powershell
