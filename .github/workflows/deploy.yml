@@ -19,12 +19,6 @@ jobs:
       - name: Publish
         run: dotnet publish ./BattleshipGame/BattleshipGame.csproj -c Release -o publish
 
-      - name: Download MSDeploy
-        shell: powershell
-        run: |
-          choco install webdeploy -y
-          & "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe" -version
-
       - name: Deploy to SmarterASP virtual app
         shell: powershell
         run: |
