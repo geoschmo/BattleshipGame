@@ -29,5 +29,4 @@ jobs:
             -source:contentPath="${{ github.workspace }}\publish" `
             -dest:iisApp="${{ secrets.MSDEPLOY_SITE }}/battleship",computerName="${{ secrets.MSDEPLOY_URL }}",userName="${{ secrets.MSDEPLOY_USER }}",password="${{ secrets.MSDEPLOY_PASS }}",authType="Basic" `
             -allowUntrusted `
-            -enableRule:AppOffline `
-            -setParam:name="IIS Web Application Name",value="${{ secrets.MSDEPLOY_SITE }}/battleship"
+            -enableRule:AppOffline
