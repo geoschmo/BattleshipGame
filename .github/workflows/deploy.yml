@@ -6,33 +6,34 @@ on:
       - master
 
 jobs:
-  build_and_deploy:
-    name: Build and Deploy
+  deploy:
     runs-on: windows-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '8.0.x'
-
-      - name: Restore dependencies
-        run: dotnet restore BattleshipGame.sln
-
-      - name: Build
-        run: dotnet build BattleshipGame.sln --configuration Release --no-restore
+          dotnet-version: 8.0.x
 
       - name: Publish
-        run: dotnet publish BattleshipGame/BattleshipGame.csproj --configuration Release --output ./publish --no-build
+        run: dotnet publish ./Battleship/Battleship.csproj -c Release -o publish
 
-      - name: Deploy via Web Deploy
-        uses: talunzhang/auto-web-deploy@v1.0.1
-        with:
-          website-name: ${{ secrets.WEBSITE_NAME }}
-          server-computer-name: ${{ secrets.SERVER_COMPUTER_NAME }}
-          server-username: ${{ secrets.SERVER_USERNAME }}
-          server-password: ${{ secrets.SERVER_PASSWORD }}
-          source-path: 'publish\'
+      - name: Download MSDeploy
+        shell: powershell
+        run: |
+          choco install webdeploy -y
+          & "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe" -version
+
+      - name: Deploy to SmarterASP virtual app
+        shell: powershell
+        run: |
+          $msdeploy = "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"
+
+          & $msdeploy `
+            -verb:sync `
+            -source:iisApp="publish" `
+            -dest:iisApp="${{ secrets.MSDEPLOY_SITE }}/battleship",computerName="${{ secrets.MSDEPLOY_URL }}",userName="${{ secrets.MSDEPLOY_USER }}",password="${{ secrets.MSDEPLOY_PASS }}",authType="Basic" `
+            -allowUntrusted `
+            -enableRule:AppOffline `
+            -setParam:name="IIS Web Application Name",value="${{ secrets.MSDEPLOY_SITE }}/battleship"
