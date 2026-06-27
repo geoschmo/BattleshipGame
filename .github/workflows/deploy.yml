@@ -28,6 +28,7 @@ jobs:
             -verb:sync `
             -source:contentPath="${{ github.workspace }}\publish" `
             -dest:contentPath="${{ secrets.MSDEPLOY_SITE }}/battleship",computerName="${{ secrets.MSDEPLOY_URL }}",userName="${{ secrets.MSDEPLOY_USER }}",password="${{ secrets.MSDEPLOY_PASS }}",authType="Basic" `
+            -skip:objectName=dirPath,absolutePath=".*\\logs" `
             -skip:objectName=filePath,absolutePath=".*\\logs\\.*" `
             -allowUntrusted `
             -enableRule:AppOffline
