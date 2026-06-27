@@ -1,4 +1,4 @@
-name: Build and Deploy to SmarterASP.NET
+name: Build and Deploy
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       - name: Publish
         run: dotnet publish ./BattleshipGame/BattleshipGame.csproj -c Release -o publish
 
-      - name: Deploy to SmarterASP virtual app
+      - name: Deploy ASP.NET Core app
         shell: powershell
         run: |
           $msdeploy = "C:\Program Files\IIS\Microsoft Web Deploy V3\msdeploy.exe"
@@ -28,5 +28,6 @@ jobs:
             -verb:sync `
             -source:contentPath="${{ github.workspace }}\publish" `
             -dest:contentPath="${{ secrets.MSDEPLOY_SITE }}/battleship",computerName="${{ secrets.MSDEPLOY_URL }}",userName="${{ secrets.MSDEPLOY_USER }}",password="${{ secrets.MSDEPLOY_PASS }}",authType="Basic" `
+            -skip:objectName=filePath,absolutePath=".*\\logs\\.*" `
             -allowUntrusted `
             -enableRule:AppOffline
