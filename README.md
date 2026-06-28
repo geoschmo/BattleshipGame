@@ -2,6 +2,10 @@
 
 A standalone multiplayer Battleship game built with ASP.NET Core 8.0 and SignalR.
 
+## Play Online
+
+🎮 **Play Battleship:** [Launch the game](https://georgeperley.com/battleship)
+
 ## Features
 
 - **Multiplayer Mode**: Real-time two-player games with room codes
